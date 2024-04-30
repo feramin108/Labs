@@ -1,0 +1,49 @@
+**Take-Home Exercise: Configure a VPN Tunnel between two Remote Sites**
+This exercise simulates configuring a secure connection (VPN tunnel) between two remote office locations. Due to the practicalities of real-world network equipment variations, specific commands will differ. However, this exercise provides a general roadmap you can adapt to most network devices.
+
+Scenario: You are the network administrator for a company with two branch offices, one in Seattle (SEA) and another in Los Angeles (LAX). You need to establish a secure VPN tunnel between them to allow secure communication and data transfer.
+
+Equipment (simulated) GNS3:
+
+Two routers (Router_SEA and Router_LAX) with basic VPN capabilities (IPsec)
+Objectives:
+
+Configure IPsec VPN tunnels on both routers.
+Establish a secure connection between the two office networks.
+Steps:
+
+Gather Information:
+
+IP Addresses: Determine the public IP addresses of both SEA and LAX office internet connections.
+Subnets: Identify the private network subnets used at each office location (e.g., SEA: 192.168.1.0/24, LAX: 192.168.2.0/24).
+Shared Secret: Choose a strong, pre-shared secret key that will be used for VPN authentication.
+Router Configuration:
+2.1. Configure Router_SEA:
+* Access Router_SEA's configuration interface.
+* Enable IPsec VPN.
+* Define a VPN transform set specifying encryption and authentication algorithms (e.g., AES-256, SHA2-512).
+* Create a VPN connection (tunnel) with the following details:
+* Local IP address: Public IP of SEA office internet connection
+* Remote IP address: Public IP of LAX office internet connection
+* Pre-shared secret key (same as chosen for LAX router)
+* Local subnet: Private network subnet of SEA office (e.g., 192.168.1.0/24)
+* Remote subnet: Private network subnet of LAX office (e.g., 192.168.2.0/24)
+2.2. Configure Router_LAX (Repeat steps similar to Router_SEA):
+* Configure Router_LAX's VPN settings using the corresponding details:
+* Local IP address: Public IP of LAX office internet connection
+* Remote IP address: Public IP of SEA office internet connection
+* Pre-shared secret key (same as chosen for SEA router)
+* Local subnet: Private network subnet of LAX office (e.g., 192.168.2.0/24)
+* Remote subnet: Private network subnet of SEA office (e.g., 192.168.1.0/24)
+
+Verification:
+
+After configuration on both routers, initiate the VPN tunnel from one side (e.g., Router_SEA).
+Monitor the router logs on both sides to check for successful tunnel establishment.
+Once the tunnel is established, try pinging a device on the remote office network from a device on the local network (e.g., ping 192.168.2.10 from a device in the 192.168.1.0/24 subnet).
+Important Notes:
+
+This is a simplified exercise. Real-world configurations may involve additional steps like NAT traversal or firewall rule adjustments for VPN traffic.
+Consult your specific router's documentation for detailed instructions on configuring IPsec VPN tunnels.
+Security is paramount. Choose strong encryption algorithms and pre-shared keys. Consider using more robust authentication methods like certificates instead of pre-shared keys for added security in real-world deployments.
+This take-home exercise allows you to explore the basic principles of configuring a VPN tunnel between two networks. Remember to adapt the steps to your specific router model and prioritize security best practices in real-world scenarios.
